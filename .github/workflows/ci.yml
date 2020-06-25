@@ -7,13 +7,13 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-      env:
-        CYPRESS_INSTALL_BINARY: 0
-    - run: npm run test:services -- --only=crates
-    - run: npm run prettier:check || { npm run prettier && git diff && exit 1; }
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+      - run: npm run test:services -- --only=crates
+      - run: npm run prettier:check || { npm run prettier && git diff && exit 1; }
